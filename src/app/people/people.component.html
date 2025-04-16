@@ -1,0 +1,7 @@
+<app-people-dumb
+  [display]="display"
+  [familyName]="familyName"
+  [personType]="personType"
+  [people]="(people$ | async) ?? []"
+  (createPerson)="onCreatePerson($event)"
+></app-people-dumb>
