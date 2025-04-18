@@ -1,0 +1,23 @@
+#person {
+  margin-bottom: 10px;
+}
+
+#name {
+  font-size: 20px;
+}
+
+#birthAge {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: 1fr 1fr;
+  font-size: 13px;
+}
+
+#status {
+  font-size: 14px;
+}
+
+.dead {
+  color: darkred;
+  // text-decoration: line-through;
+}

@@ -3,4 +3,5 @@ export interface Person {
   last: string;
   birth?: number;
   age?: number;
+  alive?: boolean;
 }

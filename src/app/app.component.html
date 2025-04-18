@@ -6,13 +6,9 @@
   <app-people display="All Adults" personType="adults"></app-people>
   <app-people display="All Children" personType="children"></app-people>
   <app-people
-    display="The Smith Family"
-    familyName="Smith"
+    [display]="'The ' + fam + ' Family'"
+    [familyName]="fam"
     personType="family"
-  ></app-people>
-  <app-people
-    display="The Jones Family"
-    familyName="Jones"
-    personType="family"
+    *ngFor="let fam of families$ | async"
   ></app-people>
 </div>

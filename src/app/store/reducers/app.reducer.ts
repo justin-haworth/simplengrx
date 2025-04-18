@@ -8,7 +8,7 @@ export interface AppState {
   people: Person[];
 }
 
-const possibleFirstNames: string[] = [
+const FIRST_NAMES: string[] = [
   'Sonya',
   'Bob',
   'Andy',
@@ -27,42 +27,51 @@ const possibleFirstNames: string[] = [
   'Erica',
   'Julie',
 ];
+const DEATH_STARTS = 80;
+const DEATH_RANGE = 10;
 
 let allPeople: Person[] = [
   {
     first: 'Adam',
     last: 'Smith',
     birth: 2010,
+    alive: true,
   },
   {
     first: 'Barbara',
     last: 'Smith',
     birth: 1980,
+    alive: true,
   },
   {
     first: 'Charlie',
     last: 'Smith',
     birth: 1977,
+    alive: true,
   },
   {
     first: 'Denise',
     last: 'Smith',
     birth: 2012,
+    alive: true,
   },
   {
     first: 'Earl',
     last: 'Jones',
     birth: 1983,
+    alive: true,
   },
   {
     first: 'Fran',
     last: 'Jones',
     birth: 1986,
+    alive: true,
   },
   {
     first: 'Gabby',
     last: 'Jones',
     birth: 2020,
+    alive: true,
   },
 ];
 
@@ -93,19 +102,36 @@ export const reducer = createReducer(
   on(fromApp.appAdvanceYear, (state) => {
     const year = state.year + 1;
     const people = state.people.map((p) => {
-      if (!p.birth) {
-        return { ...p };
+      const birth = p.birth || 2025;
+      let alive = p.alive || false;
+      let age = p.age || 0;
+
+      if (alive && age >= DEATH_STARTS) {
+        console.log(`Is this the year ${p.first} dies?`);
+
+        const randomDeathAge =
+          Math.floor(Math.random() * DEATH_RANGE) + DEATH_STARTS;
+
+        alive = age < randomDeathAge;
+
+        if (!alive) {
+          console.log(`Oh no, ${p.first} died at the age of ${age}!`);
+        }
       }
-      const age = getAge(p.birth, year);
-      return { ...p, age };
+
+      if (alive) {
+        age = getAge(birth, year);
+      }
+
+      return { ...p, age, alive };
     });
 
     return { ...state, year, people };
   }),
 
   on(fromApp.appAddPerson, (state, p) => {
-    const rand = Math.floor(Math.random() * possibleFirstNames.length);
-    const first = possibleFirstNames[rand];
+    const rand = Math.floor(Math.random() * FIRST_NAMES.length);
+    const first = FIRST_NAMES[rand];
     const initAge = Math.ceil(Math.random() * 5);
     const birth = state.year - initAge;
 
@@ -114,6 +140,7 @@ export const reducer = createReducer(
       first,
       birth,
       age: initAge,
+      alive: true,
     };
 
     const people = [...state.people, newPerson];

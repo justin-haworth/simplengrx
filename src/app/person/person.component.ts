@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 import { Person } from '../person';
 
@@ -7,7 +7,14 @@ import { Person } from '../person';
   templateUrl: './person.component.html',
   styleUrls: ['./person.component.scss'],
 })
-export class PersonComponent {
+export class PersonComponent implements OnChanges {
   // dumb component
   @Input() person!: Person;
+
+  status = '';
+
+  ngOnChanges(): void {
+    // console.log(this.person.age);
+    this.status = this.person.alive ? 'Yes' : 'No';
+  }
 }

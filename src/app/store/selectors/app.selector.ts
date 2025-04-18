@@ -16,6 +16,21 @@ export const getPeople = createSelector(getAppState, fromApp.getPeople);
 
 // custom selectors
 
+export const getAllFamilies = createSelector(getPeople, (people: Person[]) => {
+  if (!people || !people.length) {
+    return [];
+  }
+
+  const fams = people.map((p) => p.last);
+
+  return [...new Set(fams)].sort((a, b) => {
+    const an = a.toLowerCase();
+    const bn = b.toLowerCase();
+
+    return an < bn ? -1 : 1;
+  });
+});
+
 export const getAllPeopleSortedByAge = createSelector(
   getPeople,
   (people: Person[]) => {

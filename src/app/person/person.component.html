@@ -1,1 +1,8 @@
-<div id="person">{{ person.first }} {{ person.last }} | {{ person.age }}</div>
+<div id="person" [class.dead]="!person.alive">
+  <div id="name">{{ person.first }} {{ person.last }}</div>
+  <div id="birthAge">
+    <div>Born: {{ person.birth }}</div>
+    <div>Age: {{ person.age }}</div>
+  </div>
+  <div id="status">Still Kickin?: {{ status }}</div>
+</div>
