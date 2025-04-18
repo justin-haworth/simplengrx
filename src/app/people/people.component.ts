@@ -18,6 +18,7 @@ export class PeopleComponent implements OnInit {
   @Input() personType = '';
 
   people$!: Observable<Person[]>;
+  deathStarts$!: Observable<number>;
 
   constructor(private ngrxStore: Store<fromStore.RootState>) {}
 
@@ -35,6 +36,8 @@ export class PeopleComponent implements OnInit {
         this.people$ = this.ngrxStore.select(fromStore.getAllChildren);
       }
     }
+
+    this.deathStarts$ = this.ngrxStore.select(fromStore.getDeathStarts);
   }
 
   onCreatePerson(p: Person): void {

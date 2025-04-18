@@ -10,11 +10,13 @@ import * as fromStore from './store';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  year$!: Observable<number>;
   families$!: Observable<string[]>;
 
   constructor(private ngrxStore: Store<fromStore.RootState>) {}
 
   ngOnInit(): void {
+    this.year$ = this.ngrxStore.select(fromStore.getYear);
     this.families$ = this.ngrxStore.select(fromStore.getAllFamilies);
   }
 

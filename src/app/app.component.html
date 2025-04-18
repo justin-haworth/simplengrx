@@ -1,4 +1,5 @@
 <div id="top">
+  <div>The year is {{ year$ | async }}</div>
   <button (click)="onAdvanceYear()">Advance Year</button>
 </div>
 <div id="cols">
@@ -11,4 +12,8 @@
     personType="family"
     *ngFor="let fam of families$ | async"
   ></app-people>
+</div>
+<div id="note">
+  Note: No actual people died in the making of this demo. All lives have been
+  simulated.
 </div>

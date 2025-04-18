@@ -3,5 +3,6 @@
   [familyName]="familyName"
   [personType]="personType"
   [people]="(people$ | async) ?? []"
+  [deathStarts]="(deathStarts$ | async) ?? 0"
   (createPerson)="onCreatePerson($event)"
 ></app-people-dumb>

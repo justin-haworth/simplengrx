@@ -6,6 +6,7 @@ import { Person } from '../../person';
 export interface AppState {
   year: number;
   people: Person[];
+  deathStarts: number;
 }
 
 const FIRST_NAMES: string[] = [
@@ -94,6 +95,7 @@ allPeople = allPeople.map((d) => {
 export const initialAppState: AppState = {
   year: 2025,
   people: [...allPeople],
+  deathStarts: DEATH_STARTS,
 };
 
 export const reducer = createReducer(
@@ -107,16 +109,16 @@ export const reducer = createReducer(
       let age = p.age || 0;
 
       if (alive && age >= DEATH_STARTS) {
-        console.log(`Is this the year ${p.first} dies?`);
+        // console.log(`Is this the year ${p.first} dies?`);
 
         const randomDeathAge =
           Math.floor(Math.random() * DEATH_RANGE) + DEATH_STARTS;
 
         alive = age < randomDeathAge;
 
-        if (!alive) {
-          console.log(`Oh no, ${p.first} died at the age of ${age}!`);
-        }
+        // if (!alive) {
+        //   console.log(`Oh no, ${p.first} died at the age of ${age}!`);
+        // }
       }
 
       if (alive) {
@@ -152,4 +154,6 @@ export const reducer = createReducer(
   })
 );
 
+export const getYear = (state: AppState) => state.year;
 export const getPeople = (state: AppState) => state.people;
+export const getDeathStarts = (state: AppState) => state.deathStarts;

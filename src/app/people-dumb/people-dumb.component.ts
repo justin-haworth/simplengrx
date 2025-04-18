@@ -14,6 +14,7 @@ export class PeopleDumbComponent {
   @Input() familyName = '';
   @Input() personType = '';
   @Input() people!: Person[];
+  @Input() deathStarts = 0;
 
   @Output() createPerson = new EventEmitter<Person>();
 

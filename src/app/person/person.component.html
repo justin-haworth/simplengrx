@@ -4,5 +4,5 @@
     <div>Born: {{ person.birth }}</div>
     <div>Age: {{ person.age }}</div>
   </div>
-  <div id="status">Still Kickin?: {{ status }}</div>
+  <div id="status" *ngIf="showStatus">Still Kickin?: {{ status }}</div>
 </div>

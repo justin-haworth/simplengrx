@@ -4,7 +4,11 @@
     There are no longer any {{ personType }}
   </div>
   <div id="people">
-    <app-person [person]="p" *ngFor="let p of people"></app-person>
+    <app-person
+      [person]="p"
+      [deathStarts]="deathStarts"
+      *ngFor="let p of people"
+    ></app-person>
   </div>
   <div id="button" *ngIf="familyName">
     <button (click)="onAddFamilyMember()">Add Family Member</button>

@@ -12,7 +12,14 @@ export const getAppState = createSelector(
   (state: fromFeature.RootState) => state.app
 );
 
+export const getYear = createSelector(getAppState, fromApp.getYear);
+
 export const getPeople = createSelector(getAppState, fromApp.getPeople);
+
+export const getDeathStarts = createSelector(
+  getAppState,
+  fromApp.getDeathStarts
+);
 
 // custom selectors
 
@@ -41,9 +48,9 @@ export const getAllPeopleSortedByAge = createSelector(
     // ts or ngrx complain if you just do people.sort()
     // i made birth optional in the Person interface and TS lost its shit lol - this sort used to be simple
     return [...people].sort((a, b) => {
-      const ab = a.birth || 0;
-      const bb = b.birth || 0;
-      return ab - bb;
+      const aage = a.age || 0;
+      const bage = b.age || 0;
+      return bage - aage;
     });
   }
 );

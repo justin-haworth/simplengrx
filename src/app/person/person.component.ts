@@ -10,11 +10,16 @@ import { Person } from '../person';
 export class PersonComponent implements OnChanges {
   // dumb component
   @Input() person!: Person;
+  @Input() deathStarts = 0;
 
+  showStatus = false;
   status = '';
 
   ngOnChanges(): void {
     // console.log(this.person.age);
     this.status = this.person.alive ? 'Yes' : 'No';
+    this.showStatus =
+      (this.person && this.person.age && this.person.age >= this.deathStarts) ||
+      false;
   }
 }
